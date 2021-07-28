@@ -1,2 +1,2 @@
 # shutdown-pager
-Minimalistic solution for initiating proper shutdown on home server.
+Minimalistic solution for convenient shutdown initiation of linux server.
