@@ -1,8 +1,7 @@
 import os
-from time import sleep
 from bottle import request, route, run, static_file
+from time import sleep
 from multiprocessing import Process
-from threading import Thread
 
 
 @route('/')
@@ -12,19 +11,14 @@ def main():
 
 @route('/shutdown')
 def shutdown():
-    # Process(target=proc_task(request.path)).start()
-    Thread(target=proc_task(request.path)).start()
+    # that frickin args comma - https://stackoverflow.com/a/1559149
+    Process(target=proc_task, args=(request.path,)).start()
     return server_static('shutdown.html')
 
 
 @route('/reboot')
 def reboot():
-    # Process(target=proc_task(request.path)).start()
-    # new Thread still blocking the main execution
-    t = Thread(target=proc_task('/reboot'))
-    t.daemon = False
-    t.start()
-    print('started')
+    Process(target=proc_task, args=(request.path,)).start()
     return server_static('reboot.html')
 
 
@@ -46,5 +40,6 @@ def proc_task(mode):
         # os.system('/sbin/reboot now')
 
 
-localip = os.popen('hostname -I').read().split(' ')[0]
-run(host=localip, port='6969', debug=False)
+if __name__ == '__main__':
+    localip = os.popen('hostname -I').read().split(' ')[0]
+    run(host=localip, port='6969', debug=False)
