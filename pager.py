@@ -1,7 +1,7 @@
 import os
-import sched
-import time
 from bottle import request, route, run, static_file
+from time import sleep
+from multiprocessing import Process
 
 
 @route('/')
@@ -11,22 +11,14 @@ def main():
 
 @route('/shutdown')
 def shutdown():
-    # Process(target=proc_task(request.path)).start()
-    # Thread(target=proc_task(request.path)).start()
+    # that frickin args comma - https://stackoverflow.com/a/1559149
+    Process(target=proc_task, args=(request.path,)).start()
     return server_static('shutdown.html')
 
 
 @route('/reboot')
 def reboot():
-    # Process(target=proc_task(request.path)).start()
-    # new Thread still blocking the main execution
-    # t = Thread(target=proc_task('/reboot'))
-    # t.daemon = False
-    # t.start()
-
-    s.enter(5, 1, proc_task('/reboot'))
-    s.run()
-    print('started')
+    Process(target=proc_task, args=(request.path,)).start()
     return server_static('reboot.html')
 
 
@@ -39,7 +31,7 @@ def server_static(filename):
 
 
 def proc_task(mode):
-    time.sleep(5)
+    sleep(5)
     if (mode == '/shutdown'):
         print('shutdown')
         # os.system('/sbin/shutdown now')
@@ -50,5 +42,4 @@ def proc_task(mode):
 
 if __name__ == '__main__':
     localip = os.popen('hostname -I').read().split(' ')[0]
-    s = sched.scheduler(time.time, time.sleep)
     run(host=localip, port='6969', debug=False)
