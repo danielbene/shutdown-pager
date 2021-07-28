@@ -1,2 +1,2 @@
 # shutdown-pager
-Web interface for homelab shutdown
+Minimalistic solution for initiating proper shutdown on home server.
