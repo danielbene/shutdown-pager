@@ -1,6 +1,7 @@
 #! /bin/bash
 
 project_path="/path/to/shutdown-pager/"
+user="your-user-name"
 
 # root user's UID is always 0
 if [ "$EUID" -ne 0 ]
@@ -36,6 +37,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
+User="$user"
 ExecStart=/usr/bin/python3 "${project_path}pager.py"
 
 [Install]
