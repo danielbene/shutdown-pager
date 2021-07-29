@@ -38,8 +38,7 @@ def proc_task(mode):
         cmd = 'sudo /sbin/reboot now'
 
     # sudoers rule allow passwordless execution (still needs sudo prefix)
-    # os.system(cmd)
-    print('this was a ' + cmd)
+    os.system(cmd)
 
 
 if __name__ == '__main__':
