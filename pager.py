@@ -33,11 +33,13 @@ def server_static(filename):
 def proc_task(mode):
     sleep(5)
     if (mode == '/shutdown'):
-        print('shutdown')
-        # os.system('/sbin/shutdown now')
+        cmd = 'sudo /sbin/shutdown now'
     else:
-        print('reboot')
-        # os.system('/sbin/reboot now')
+        cmd = 'sudo /sbin/reboot now'
+
+    # sudoers rule allow passwordless execution (still needs sudo prefix)
+    # os.system(cmd)
+    print('this was a ' + cmd)
 
 
 if __name__ == '__main__':
