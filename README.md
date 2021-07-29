@@ -2,7 +2,7 @@
 Minimalistic solution for convenient shutdown/reboot initiation of a local linux server.
 
 ## how-to
-Modify `project_path` in the `install.sh` file to the cloned dir. After running it with sudo, it will take care of everything:
+Modify `project_path` to the cloned dir path and the `user` to your username in the `install.sh` file . After running it with sudo, it will take care of everything:
 - installing python deps
 - setting up sudoers for passwordless shutdown
 - creating a linux service for handling and autorun
