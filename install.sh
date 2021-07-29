@@ -37,7 +37,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-User="$user"
+User=$user
 ExecStart=/usr/bin/python3 "${project_path}pager.py"
 
 [Install]
